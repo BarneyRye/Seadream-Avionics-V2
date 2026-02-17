@@ -1,0 +1,748 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">17/02/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">21:22:25</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc" class="file"><acronym title="C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc">C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">120</td></tr>
+</table>
+</td>
+</table><a name="IDLINTKGWJL04CP53V4TIFIKBJLI0GCZT0HBKVSXJ0NBBYU425E2S"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRW4CPQIBO2EFKPJHW0WOBO1SULKEL3NKFV253NPMLPQ1X3WE1QDB">Clearance Constraint (Gap=8mil) (InNetClass('PWR')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKIWTDSFQ0PKMNGVFGLF5BANCKNSC0HE43SCFDPDZEIRCTOJATQG">Clearance Constraint (Gap=8mil) (InNetClass('SDMMC')),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCF544TUFMBQGV0X5MAOAMLIUKWZIQT3JIWMRKF0MPJHKA0NV2SO">Clearance Constraint (Gap=6mil) (All),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBGBJTJ1NCZNUG2E4IIIMI3K0IGVJG3HQE5PLXAIPVBKRNOZJOYEI">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXIZPTDXX3P3BFZ55VYGFNTH1DOZR0GKKV04DOGNSGMIR0SQ5HAMO">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFK4RUHQHNL5HBO5JVGW2H5PJBNV3WZCNPH3JITOPYP5K4HMIYUOL">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTH0HPS2W4CBBMP52Z4BVB2VRDCUO11XNWDDD3ZC0BWWMD0RRUIGC">Width Constraint (Min=9.842mil) (Max=13.78mil) (Preferred=11.024mil) (InNetClass('SDMMC'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWACWXC4EVFAQIU4SNPZ2DJG3DEWXIBCGLPDJOCKWARTUC1GKEN2M">Width Constraint (Min=11.811mil) (Max=39.37mil) (Preferred=19.685mil) (InNetClass('PWR'))</a></td>
+<td class="column2">17</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPWNA1UNEFBSLJEX3EKD5UNU11PZW2EX2FIZZGWN0EGQQ54SRUED">Width Constraint (Min=5.906mil) (Max=11.811mil) (Preferred=7.874mil) (All)</a></td>
+<td class="column2">10</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHAIWSYNJAUILJMM1DSYUT4YRTCFDCUYKQDJN0NG4TH5CAMLC05EK">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5EPZTXKSGES1HJQQCBM4N2XW2DFKO0GWMDQAY4MGUOKWGGS1TSYB">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (InPadClass('PowerPads'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAIPFLUXZ1QTGK5UQR2MZEWPNQOYPNZZED0NOBDJQDXK2N4BBE1H">Power Plane Connect Rule(Relief Connect )(Expansion=11.811mil) (Conductor Width=5mil) (Air Gap=5mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDI1RY5VP25OPMIJ4BE2X1SVT2ANGMCQTYNU5UH0KKTBUJV5JWLUJN">Minimum Annular Ring (Minimum=3mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWH15C4UW2XYME0B2BHEY0N5UIO1S4OIW0YRO2RGSTQS0CSF5IP">Hole Size Constraint (Min=11.811mil) (Max=248.031mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKJ5LFVPD4OCOBRU0CWM5MQOJQK4OOIJFAQAKDTLAVABAGRGPD5AK">Hole To Hole Clearance (Gap=9.842mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDT2KEGDDRQEKKFV1D4IALZDLQUOE2U02KZVU3UKHNMUG1ARIAZU2N">Minimum Solder Mask Sliver (Gap=0mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0UDSRGHLJMVXF2KRQIS5ZAJLTI5TZ44VEFSV1CEWJAEUJ1VJA5GB">Silk To Solder Mask (Clearance=5mil) (IsPad),(All)</a></td>
+<td class="column2">72</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0IJXYW3D1KPPNAQZZDGN3SCQWDFJ22MNK1R0VOC1PGWTBKEU31ZG">Silk to Silk (Clearance=0mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQK3SZUD334WMCMKCPZLQXZKFHI04MVUDYT1A3OIRVP5D1Y2KINN">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID51SVJVWN40NEDFXGAHBDKKCAGKCXEAX1SZLM11GZJCEUSOWD2I0M">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJVJDJJWK2110PFGJM3KZZJIFKHQY0WDZLN5PBIKEA4RMTXWFVDFJ">Matched Lengths(Tolerance=39.37mil) (InxSignalClass('SDMMC'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKTUIXIJ5JCG1HAW1DWDJSEQH4VYGAQ5SIKN4ONL3KAG0QD20YDM">Height Constraint (Min=0mil) (Max=71497.938mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">120</td>
+</tr>
+</table><br><a name="IDKIWTDSFQ0PKMNGVFGLF5BANCKNSC0HE43SCFDPDZEIRCTOJATQG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=8mil) (InNetClass('SDMMC')),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4700.316mil|Location2.X=4709.566mil|Location1.Y=3211.348mil|Location2.Y=3220.598mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4700.316mil|Location2.X=4709.566mil|Location1.Y=3211.348mil|Location2.Y=3220.598mil|Absolute=True">Clearance Constraint: (7.976mil &lt; 8mil) Between Pad B1-38(4675.905mil,3206.079mil) on Top Layer And Track (4675.905mil,3225.472mil)(4736.811mil,3225.472mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4700.316mil|Location2.X=4709.566mil|Location1.Y=3231.033mil|Location2.Y=3240.283mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4700.316mil|Location2.X=4709.566mil|Location1.Y=3231.033mil|Location2.Y=3240.283mil|Absolute=True">Clearance Constraint: (7.976mil &lt; 8mil) Between Pad B1-39(4675.905mil,3225.764mil) on Top Layer And Track (4675.905mil,3245.157mil)(4727.008mil,3245.157mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDCF544TUFMBQGV0X5MAOAMLIUKWZIQT3JIWMRKF0MPJHKA0NV2SO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=6mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4263.287mil|Location2.X=4279.627mil|Location1.Y=3603.065mil|Location2.Y=3614.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4263.287mil|Location2.X=4279.627mil|Location1.Y=3603.065mil|Location2.Y=3614.158mil|Absolute=True">Clearance Constraint: (9.086mil &lt; 9.842mil) Between Hole of Pad S2-MH1(4275mil,3630mil) on Multi-Layer And Pad U4-5(4242.734mil,3592.598mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4606.823mil|Location2.X=4614.808mil|Location1.Y=2885.398mil|Location2.Y=2893.453mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4606.823mil|Location2.X=4614.808mil|Location1.Y=2885.398mil|Location2.Y=2893.453mil|Absolute=True">Clearance Constraint: (5.929mil &lt; 6mil) Between Pad U1-6(4619.842mil,2880.218mil) on Top Layer And Track (4602.425mil,2890.761mil)(4608.609mil,2896.945mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4031.668mil|Location2.X=4039.724mil|Location1.Y=3590.933mil|Location2.Y=3598.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4031.668mil|Location2.X=4039.724mil|Location1.Y=3590.933mil|Location2.Y=3598.918mil|Absolute=True">Clearance Constraint: (4.601mil &lt; 6mil) Between Track (4019.457mil,3631.086mil)(4057.095mil,3593.449mil) on Top Layer And Via (4025.315mil,3585.315mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXIZPTDXX3P3BFZ55VYGFNTH1DOZR0GKKV04DOGNSGMIR0SQ5HAMO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4202.478mil|Location2.X=4228.069mil|Location1.Y=2753.071mil|Location2.Y=2785.551mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4202.478mil|Location2.X=4228.069mil|Location1.Y=2753.071mil|Location2.Y=2785.551mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad C14-2(4215.273mil,2766.85mil) on Bottom Layer And Pad U2-8(4220.472mil,2774.232mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.85mil|Location2.X=3902.126mil|Location1.Y=3159.882mil|Location2.Y=3289.803mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.85mil|Location2.X=3902.126mil|Location1.Y=3159.882mil|Location2.Y=3289.803mil|Absolute=True">Un-Routed Net Constraint: Net CC1 Between Pad J1-A5(3879.488mil,3165.787mil) on Bottom Layer And Pad J1-B5(3879.488mil,3283.898mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.85mil|Location2.X=3902.126mil|Location1.Y=3199.252mil|Location2.Y=3250.433mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.85mil|Location2.X=3902.126mil|Location1.Y=3199.252mil|Location2.Y=3250.433mil|Absolute=True">Un-Routed Net Constraint: Net USB_P Between Pad J1-A6(3879.488mil,3205.157mil) on Bottom Layer And Pad J1-B6(3879.488mil,3244.528mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.85mil|Location2.X=3902.126mil|Location1.Y=3179.567mil|Location2.Y=3230.748mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.85mil|Location2.X=3902.126mil|Location1.Y=3179.567mil|Location2.Y=3230.748mil|Absolute=True">Un-Routed Net Constraint: Net USB_N Between Pad J1-B7(3879.488mil,3185.472mil) on Bottom Layer And Pad J1-A7(3879.488mil,3224.843mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.472mil|Location2.X=4461.417mil|Location1.Y=2765.768mil|Location2.Y=3129.095mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.472mil|Location2.X=4461.417mil|Location1.Y=2765.768mil|Location2.Y=3129.095mil|Absolute=True">Un-Routed Net Constraint: Net IMU_INT Between Pad U2-4(4220.472mil,2865.768mil) on Top Layer And Track (4361.417mil,3029.095mil)(4361.417mil,3091.417mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3575mil|Location2.X=5465mil|Location1.Y=2730mil|Location2.Y=3792.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3575mil|Location2.X=5465mil|Location1.Y=2730mil|Location2.Y=3792.992mil|Absolute=True">Un-Routed Net Constraint: Polygon  (NONET_L01_P001) on Top Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3575mil|Location2.X=5465mil|Location1.Y=2730mil|Location2.Y=3792.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3575mil|Location2.X=5465mil|Location1.Y=2730mil|Location2.Y=3792.992mil|Absolute=True">Un-Routed Net Constraint: Polygon  (NONET_L04_P004) on Bottom Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=3580mil|Location1.Y=2725mil|Location2.Y=3797.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=3580mil|Location1.Y=2725mil|Location2.Y=3797.992mil|Absolute=True">Un-Routed Net Constraint: Track (3575mil,2730mil)(3575mil,3792.992mil) on Multi-Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=5470mil|Location1.Y=2725mil|Location2.Y=2735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=5470mil|Location1.Y=2725mil|Location2.Y=2735mil|Absolute=True">Un-Routed Net Constraint: Track (3575mil,2730mil)(5465mil,2730mil) on Multi-Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=5470mil|Location1.Y=3787.992mil|Location2.Y=3797.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=5470mil|Location1.Y=3787.992mil|Location2.Y=3797.992mil|Absolute=True">Un-Routed Net Constraint: Track (3575mil,3792.992mil)(5465mil,3792.992mil) on Multi-Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4121.827mil|Location2.X=4395mil|Location1.Y=3304.905mil|Location2.Y=3520mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4121.827mil|Location2.X=4395mil|Location1.Y=3304.905mil|Location2.Y=3520mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Track (4162.52mil,3404.905mil)(4221.827mil,3404.905mil) on Top Layer And Via (4295mil,3420mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5460mil|Location2.X=5470mil|Location1.Y=2725mil|Location2.Y=3797.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5460mil|Location2.X=5470mil|Location1.Y=2725mil|Location2.Y=3797.992mil|Absolute=True">Un-Routed Net Constraint: Track (5465mil,2730mil)(5465mil,3792.992mil) on Multi-Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDWACWXC4EVFAQIU4SNPZ2DJG3DEWXIBCGLPDJOCKWARTUC1GKEN2M"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=11.811mil) (Max=39.37mil) (Preferred=19.685mil) (InNetClass('PWR'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3768.303mil|Location2.X=3785.99mil|Location1.Y=3524.62mil|Location2.Y=3536.106mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3768.303mil|Location2.X=3785.99mil|Location1.Y=3524.62mil|Location2.Y=3536.106mil|Absolute=True">Width Constraint: Track (3772.48mil,3531.929mil)(3775mil,3529.409mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3767.795mil|Location2.X=3782.105mil|Location1.Y=3499.268mil|Location2.Y=3512.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3767.795mil|Location2.X=3782.105mil|Location1.Y=3499.268mil|Location2.Y=3512.885mil|Absolute=True">Width Constraint: Track (3775mil,3480mil)(3775mil,3529.409mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3857.795mil|Location2.X=3872.105mil|Location1.Y=2902.063mil|Location2.Y=2915.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3857.795mil|Location2.X=3872.105mil|Location1.Y=2902.063mil|Location2.Y=2915.68mil|Absolute=True">Width Constraint: Track (3865mil,2900mil)(3865mil,2915mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3877.063mil|Location2.X=3894.679mil|Location1.Y=2927.063mil|Location2.Y=2938.62mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3877.063mil|Location2.X=3894.679mil|Location1.Y=2927.063mil|Location2.Y=2938.62mil|Absolute=True">Width Constraint: Track (3865mil,2915mil)(3900mil,2950mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3909.563mil|Location2.X=3927.179mil|Location1.Y=2959.563mil|Location2.Y=2971.12mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3909.563mil|Location2.X=3927.179mil|Location1.Y=2959.563mil|Location2.Y=2971.12mil|Absolute=True">Width Constraint: Track (3900mil,2950mil)(3930mil,2980mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3922.795mil|Location2.X=3937.105mil|Location1.Y=3054.563mil|Location2.Y=3068.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3922.795mil|Location2.X=3937.105mil|Location1.Y=3054.563mil|Location2.Y=3068.18mil|Absolute=True">Width Constraint: Track (3930mil,2980mil)(3930mil,3140mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.102mil|Location2.X=4195.412mil|Location1.Y=3543.894mil|Location2.Y=3557.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.102mil|Location2.X=4195.412mil|Location1.Y=3543.894mil|Location2.Y=3557.511mil|Absolute=True">Width Constraint: Track (4188.307mil,3548.307mil)(4188.307mil,3550.354mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.102mil|Location2.X=4195.412mil|Location1.Y=3578.178mil|Location2.Y=3591.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.102mil|Location2.X=4195.412mil|Location1.Y=3578.178mil|Location2.Y=3591.795mil|Absolute=True">Width Constraint: Track (4188.307mil,3550.354mil)(4188.307mil,3616.875mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4182.909mil|Location2.X=4200.525mil|Location1.Y=3611.477mil|Location2.Y=3623.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4182.909mil|Location2.X=4200.525mil|Location1.Y=3611.477mil|Location2.Y=3623.034mil|Absolute=True">Width Constraint: Track (4188.307mil,3616.875mil)(4188.386mil,3616.954mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.102mil|Location2.X=4195.412mil|Location1.Y=3652.779mil|Location2.Y=3666.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.102mil|Location2.X=4195.412mil|Location1.Y=3652.779mil|Location2.Y=3666.396mil|Absolute=True">Width Constraint: Track (4188.307mil,3643.125mil)(4188.307mil,3673.307mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4182.909mil|Location2.X=4200.596mil|Location1.Y=3637.037mil|Location2.Y=3648.523mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4182.909mil|Location2.X=4200.596mil|Location1.Y=3637.037mil|Location2.Y=3648.523mil|Absolute=True">Width Constraint: Track (4188.307mil,3643.125mil)(4188.386mil,3643.046mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4206.217mil|Location2.X=4223.833mil|Location1.Y=3691.217mil|Location2.Y=3702.773mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4206.217mil|Location2.X=4223.833mil|Location1.Y=3691.217mil|Location2.Y=3702.773mil|Absolute=True">Width Constraint: Track (4188.307mil,3673.307mil)(4235mil,3720mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.181mil|Location2.X=4195.491mil|Location1.Y=3624.563mil|Location2.Y=3638.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.181mil|Location2.X=4195.491mil|Location1.Y=3624.563mil|Location2.Y=3638.18mil|Absolute=True">Width Constraint: Track (4188.386mil,3616.954mil)(4188.386mil,3643.046mil) on Bottom Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4262.063mil|Location2.X=4281.81mil|Location1.Y=3714.563mil|Location2.Y=3725.437mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4262.063mil|Location2.X=4281.81mil|Location1.Y=3714.563mil|Location2.Y=3725.437mil|Absolute=True">Width Constraint: Track (4235mil,3720mil)(4300mil,3720mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4309.563mil|Location2.X=4327.179mil|Location1.Y=3729.563mil|Location2.Y=3741.12mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4309.563mil|Location2.X=4327.179mil|Location1.Y=3729.563mil|Location2.Y=3741.12mil|Absolute=True">Width Constraint: Track (4300mil,3720mil)(4330mil,3750mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4313.196mil|Location2.X=4330.883mil|Location1.Y=3695.318mil|Location2.Y=3706.804mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4313.196mil|Location2.X=4330.883mil|Location1.Y=3695.318mil|Location2.Y=3706.804mil|Absolute=True">Width Constraint: Track (4300mil,3720mil)(4337.266mil,3682.734mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4330.061mil|Location2.X=4344.371mil|Location1.Y=3669.631mil|Location2.Y=3683.248mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4330.061mil|Location2.X=4344.371mil|Location1.Y=3669.631mil|Location2.Y=3683.248mil|Absolute=True">Width Constraint: Track (4337.266mil,3667.402mil)(4337.266mil,3682.734mil) on Top Layer Actual Width = 7.874mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDPWNA1UNEFBSLJEX3EKD5UNU11PZW2EX2FIZZGWN0EGQQ54SRUED"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=5.906mil) (Max=11.811mil) (Preferred=7.874mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3811.922mil|Location2.X=3858.995mil|Location1.Y=3636.728mil|Location2.Y=3659.413mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3811.922mil|Location2.X=3858.995mil|Location1.Y=3636.728mil|Location2.Y=3659.413mil|Absolute=True">Width Constraint: Track (3775mil,3648.071mil)(3871.53mil,3648.071mil) on Bottom Layer Actual Width = 19.685mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3758.941mil|Location2.X=3794.671mil|Location1.Y=3207.693mil|Location2.Y=3239.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3758.941mil|Location2.X=3794.671mil|Location1.Y=3207.693mil|Location2.Y=3239.465mil|Absolute=True">Width Constraint: Track (3776.929mil,3190mil)(3776.929mil,3248.071mil) on Top Layer Actual Width = 19.685mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3867.037mil|Location2.X=3908.964mil|Location1.Y=3626.11mil|Location2.Y=3652.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3867.037mil|Location2.X=3908.964mil|Location1.Y=3626.11mil|Location2.Y=3652.563mil|Absolute=True">Width Constraint: Track (3871.53mil,3648.071mil)(3885.23mil,3634.37mil) on Bottom Layer Actual Width = 19.685mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4024.965mil|Location2.X=4075.029mil|Location1.Y=3594.11mil|Location2.Y=3625.579mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4024.965mil|Location2.X=4075.029mil|Location1.Y=3594.11mil|Location2.Y=3625.579mil|Absolute=True">Width Constraint: Track (4019.457mil,3631.086mil)(4057.095mil,3593.449mil) on Top Layer Actual Width = 23.622mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4064.965mil|Location2.X=4121.206mil|Location1.Y=3580.138mil|Location2.Y=3606.76mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4064.965mil|Location2.X=4121.206mil|Location1.Y=3580.138mil|Location2.Y=3606.76mil|Absolute=True">Width Constraint: Track (4057.095mil,3593.449mil)(4099.457mil,3593.449mil) on Top Layer Actual Width = 23.622mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4090.37mil|Location2.X=4140.434mil|Location1.Y=3575.523mil|Location2.Y=3606.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4090.37mil|Location2.X=4140.434mil|Location1.Y=3575.523mil|Location2.Y=3606.992mil|Absolute=True">Width Constraint: Track (4100mil,3597.362mil)(4107.362mil,3590mil) on Top Layer Actual Width = 23.622mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4102.87mil|Location2.X=4159.111mil|Location1.Y=3576.689mil|Location2.Y=3603.311mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4102.87mil|Location2.X=4159.111mil|Location1.Y=3576.689mil|Location2.Y=3603.311mil|Absolute=True">Width Constraint: Track (4107.362mil,3590mil)(4125mil,3590mil) on Top Layer Actual Width = 23.622mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4169.257mil|Location2.X=4225.498mil|Location1.Y=3576.689mil|Location2.Y=3603.311mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4169.257mil|Location2.X=4225.498mil|Location1.Y=3576.689mil|Location2.Y=3603.311mil|Absolute=True">Width Constraint: Track (4125mil,3590mil)(4240.136mil,3590mil) on Top Layer Actual Width = 23.622mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.124mil|Location2.X=4277.968mil|Location1.Y=3577.988mil|Location2.Y=3609.677mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.124mil|Location2.X=4277.968mil|Location1.Y=3577.988mil|Location2.Y=3609.677mil|Absolute=True">Width Constraint: Track (4240.136mil,3590mil)(4242.734mil,3592.598mil) on Top Layer Actual Width = 23.622mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4352.29mil|Location2.X=4399.363mil|Location1.Y=3618.657mil|Location2.Y=3641.343mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4352.29mil|Location2.X=4399.363mil|Location1.Y=3618.657mil|Location2.Y=3641.343mil|Absolute=True">Width Constraint: Track (4337.266mil,3630mil)(4390mil,3630mil) on Top Layer Actual Width = 19.685mil, Target Width = 11.811mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0UDSRGHLJMVXF2KRQIS5ZAJLTI5TZ44VEFSV1CEWJAEUJ1VJA5GB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=5mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4305.061mil|Location2.X=4311.311mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4305.061mil|Location2.X=4311.311mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C11-1(4295.881mil,2967.52mil) on Top Layer And Track (4313.597mil,2959.646mil)(4313.597mil,2975.394mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4315.884mil|Location2.X=4322.134mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4315.884mil|Location2.X=4322.134mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C11-2(4331.314mil,2967.52mil) on Top Layer And Track (4313.597mil,2959.646mil)(4313.597mil,2975.394mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4600.525mil|Location2.X=4606.775mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4600.525mil|Location2.X=4606.775mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C12-1(4591.345mil,2967.52mil) on Top Layer And Track (4609.061mil,2959.646mil)(4609.061mil,2975.394mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4611.348mil|Location2.X=4617.598mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4611.348mil|Location2.X=4617.598mil|Location1.Y=2956.521mil|Location2.Y=2962.771mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C12-2(4626.778mil,2967.52mil) on Top Layer And Track (4609.061mil,2959.646mil)(4609.061mil,2975.394mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.001mil|Location2.X=4210.251mil|Location1.Y=2816.463mil|Location2.Y=2822.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.001mil|Location2.X=4210.251mil|Location1.Y=2816.463mil|Location2.Y=2822.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C13-1(4215mil,2807.284mil) on Bottom Layer And Track (4207.126mil,2825mil)(4222.874mil,2825mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.001mil|Location2.X=4210.251mil|Location1.Y=2827.286mil|Location2.Y=2833.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.001mil|Location2.X=4210.251mil|Location1.Y=2827.286mil|Location2.Y=2833.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C13-2(4215mil,2842.716mil) on Bottom Layer And Track (4207.126mil,2825mil)(4222.874mil,2825mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4189.02mil|Location2.X=4195.27mil|Location1.Y=2755.851mil|Location2.Y=2762.101mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4189.02mil|Location2.X=4195.27mil|Location1.Y=2755.851mil|Location2.Y=2762.101mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C14-1(4179.84mil,2766.85mil) on Bottom Layer And Track (4197.557mil,2758.976mil)(4197.557mil,2774.724mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4199.843mil|Location2.X=4206.093mil|Location1.Y=2755.851mil|Location2.Y=2762.101mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4199.843mil|Location2.X=4206.093mil|Location1.Y=2755.851mil|Location2.Y=2762.101mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C14-2(4215.273mil,2766.85mil) on Bottom Layer And Track (4197.557mil,2758.976mil)(4197.557mil,2774.724mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4053.549mil|Location2.X=4059.799mil|Location1.Y=3440.773mil|Location2.Y=3447.023mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4053.549mil|Location2.X=4059.799mil|Location1.Y=3440.773mil|Location2.Y=3447.023mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C17-1(4044.369mil,3451.772mil) on Top Layer And Track (4062.086mil,3443.898mil)(4062.086mil,3459.646mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4064.372mil|Location2.X=4070.622mil|Location1.Y=3440.773mil|Location2.Y=3447.023mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4064.372mil|Location2.X=4070.622mil|Location1.Y=3440.773mil|Location2.Y=3447.023mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C17-2(4079.802mil,3451.772mil) on Top Layer And Track (4062.086mil,3443.898mil)(4062.086mil,3459.646mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3980.956mil|Location2.X=3987.206mil|Location1.Y=3187.173mil|Location2.Y=3193.423mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3980.956mil|Location2.X=3987.206mil|Location1.Y=3187.173mil|Location2.Y=3193.423mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C18-1(3991.955mil,3177.993mil) on Top Layer And Track (3984.081mil,3195.709mil)(3999.829mil,3195.709mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3980.956mil|Location2.X=3987.206mil|Location1.Y=3197.995mil|Location2.Y=3204.245mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3980.956mil|Location2.X=3987.206mil|Location1.Y=3197.995mil|Location2.Y=3204.245mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C18-2(3991.955mil,3213.426mil) on Top Layer And Track (3984.081mil,3195.709mil)(3999.829mil,3195.709mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4312.455mil|Location2.X=4318.705mil|Location1.Y=3450.615mil|Location2.Y=3456.865mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4312.455mil|Location2.X=4318.705mil|Location1.Y=3450.615mil|Location2.Y=3456.865mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C2-1(4327.885mil,3461.614mil) on Bottom Layer And Track (4310.168mil,3453.74mil)(4310.168mil,3469.488mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4301.632mil|Location2.X=4307.882mil|Location1.Y=3450.615mil|Location2.Y=3456.865mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4301.632mil|Location2.X=4307.882mil|Location1.Y=3450.615mil|Location2.Y=3456.865mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C2-2(4292.452mil,3461.614mil) on Bottom Layer And Track (4310.168mil,3453.74mil)(4310.168mil,3469.488mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5064.001mil|Location2.X=5070.251mil|Location1.Y=3256.463mil|Location2.Y=3262.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5064.001mil|Location2.X=5070.251mil|Location1.Y=3256.463mil|Location2.Y=3262.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C4-1(5075mil,3247.284mil) on Top Layer And Track (5067.126mil,3265mil)(5082.874mil,3265mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5064.001mil|Location2.X=5070.251mil|Location1.Y=3267.286mil|Location2.Y=3273.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5064.001mil|Location2.X=5070.251mil|Location1.Y=3267.286mil|Location2.Y=3273.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C4-2(5075mil,3282.716mil) on Top Layer And Track (5067.126mil,3265mil)(5082.874mil,3265mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4726.481mil|Location2.X=4732.731mil|Location1.Y=3382.764mil|Location2.Y=3389.014mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4726.481mil|Location2.X=4732.731mil|Location1.Y=3382.764mil|Location2.Y=3389.014mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C5-1(4737.48mil,3373.584mil) on Top Layer And Track (4729.606mil,3391.3mil)(4745.354mil,3391.3mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4726.481mil|Location2.X=4732.731mil|Location1.Y=3393.587mil|Location2.Y=3399.837mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4726.481mil|Location2.X=4732.731mil|Location1.Y=3393.587mil|Location2.Y=3399.837mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C5-2(4737.48mil,3409.017mil) on Top Layer And Track (4729.606mil,3391.3mil)(4745.354mil,3391.3mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3424.908mil|Location2.Y=3431.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3424.908mil|Location2.Y=3431.158mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C6-1(4162.52mil,3440.338mil) on Top Layer And Track (4154.646mil,3422.622mil)(4170.394mil,3422.622mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3414.086mil|Location2.Y=3420.336mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3414.086mil|Location2.Y=3420.336mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C6-2(4162.52mil,3404.905mil) on Top Layer And Track (4154.646mil,3422.622mil)(4170.394mil,3422.622mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4569.001mil|Location2.X=4575.251mil|Location1.Y=2852.286mil|Location2.Y=2858.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4569.001mil|Location2.X=4575.251mil|Location1.Y=2852.286mil|Location2.Y=2858.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C7-1(4580mil,2867.716mil) on Bottom Layer And Track (4572.126mil,2850mil)(4587.874mil,2850mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4569.001mil|Location2.X=4575.251mil|Location1.Y=2841.463mil|Location2.Y=2847.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4569.001mil|Location2.X=4575.251mil|Location1.Y=2841.463mil|Location2.Y=2847.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C7-2(4580mil,2832.284mil) on Bottom Layer And Track (4572.126mil,2850mil)(4587.874mil,2850mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4527.662mil|Location2.X=4533.912mil|Location1.Y=2851.302mil|Location2.Y=2857.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4527.662mil|Location2.X=4533.912mil|Location1.Y=2851.302mil|Location2.Y=2857.552mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C8-1(4538.661mil,2866.733mil) on Top Layer And Track (4530.787mil,2849.016mil)(4546.535mil,2849.016mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4527.662mil|Location2.X=4533.912mil|Location1.Y=2840.479mil|Location2.Y=2846.729mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4527.662mil|Location2.X=4533.912mil|Location1.Y=2840.479mil|Location2.Y=2846.729mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C8-2(4538.661mil,2831.3mil) on Top Layer And Track (4530.787mil,2849.016mil)(4546.535mil,2849.016mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3168.006mil|Location2.Y=3174.256mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3168.006mil|Location2.Y=3174.256mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C9-1(4162.52mil,3158.826mil) on Top Layer And Track (4154.646mil,3176.542mil)(4170.394mil,3176.542mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3178.829mil|Location2.Y=3185.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.521mil|Location2.X=4157.771mil|Location1.Y=3178.829mil|Location2.Y=3185.079mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad C9-2(4162.52mil,3194.259mil) on Top Layer And Track (4154.646mil,3176.542mil)(4170.394mil,3176.542mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4983.607mil|Location2.X=4989.857mil|Location1.Y=3427.997mil|Location2.Y=3434.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4983.607mil|Location2.X=4989.857mil|Location1.Y=3427.997mil|Location2.Y=3434.247mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.291mil &lt; 5mil) Between Pad J2-1(4996.575mil,3412.244mil) on Bottom Layer And Track (4986.732mil,3437.205mil)(4986.732mil,3469.528mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.291mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5045.044mil|Location2.X=5051.294mil|Location1.Y=3051.639mil|Location2.Y=3057.889mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5045.044mil|Location2.X=5051.294mil|Location1.Y=3051.639mil|Location2.Y=3057.889mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.764mil &lt; 5mil) Between Pad J2-9(5010.354mil,3063.425mil) on Bottom Layer And Track (5054.488mil,3054.764mil)(5435.551mil,3054.764mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.764mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4479.001mil|Location2.X=4485.251mil|Location1.Y=3597.286mil|Location2.Y=3603.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4479.001mil|Location2.X=4485.251mil|Location1.Y=3597.286mil|Location2.Y=3603.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R10-1(4490mil,3612.716mil) on Top Layer And Track (4482.126mil,3595mil)(4497.874mil,3595mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4479.001mil|Location2.X=4485.251mil|Location1.Y=3586.463mil|Location2.Y=3592.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4479.001mil|Location2.X=4485.251mil|Location1.Y=3586.463mil|Location2.Y=3592.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R10-2(4490mil,3577.284mil) on Top Layer And Track (4482.126mil,3595mil)(4497.874mil,3595mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4811.463mil|Location2.X=4817.713mil|Location1.Y=3074.001mil|Location2.Y=3080.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4811.463mil|Location2.X=4817.713mil|Location1.Y=3074.001mil|Location2.Y=3080.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R1-1(4802.283mil,3085mil) on Bottom Layer And Track (4820mil,3077.126mil)(4820mil,3092.874mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3778.747mil|Location2.X=3784.997mil|Location1.Y=3284.001mil|Location2.Y=3290.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3778.747mil|Location2.X=3784.997mil|Location1.Y=3284.001mil|Location2.Y=3290.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R11-1(3769.567mil,3295mil) on Top Layer And Track (3787.284mil,3287.126mil)(3787.284mil,3302.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3789.57mil|Location2.X=3795.82mil|Location1.Y=3284.001mil|Location2.Y=3290.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3789.57mil|Location2.X=3795.82mil|Location1.Y=3284.001mil|Location2.Y=3290.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R11-2(3805mil,3295mil) on Top Layer And Track (3787.284mil,3287.126mil)(3787.284mil,3302.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4822.286mil|Location2.X=4828.536mil|Location1.Y=3074.001mil|Location2.Y=3080.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4822.286mil|Location2.X=4828.536mil|Location1.Y=3074.001mil|Location2.Y=3080.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R1-2(4837.717mil,3085mil) on Bottom Layer And Track (4820mil,3077.126mil)(4820mil,3092.874mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4509.001mil|Location2.X=4515.251mil|Location1.Y=3463.747mil|Location2.Y=3469.997mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4509.001mil|Location2.X=4515.251mil|Location1.Y=3463.747mil|Location2.Y=3469.997mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R12-1(4520mil,3454.567mil) on Bottom Layer And Track (4512.126mil,3472.284mil)(4527.874mil,3472.284mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4509.001mil|Location2.X=4515.251mil|Location1.Y=3474.57mil|Location2.Y=3480.82mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4509.001mil|Location2.X=4515.251mil|Location1.Y=3474.57mil|Location2.Y=3480.82mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R12-2(4520mil,3490mil) on Bottom Layer And Track (4512.126mil,3472.284mil)(4527.874mil,3472.284mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4762.286mil|Location2.X=4768.536mil|Location1.Y=3209.001mil|Location2.Y=3215.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4762.286mil|Location2.X=4768.536mil|Location1.Y=3209.001mil|Location2.Y=3215.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R13-1(4777.717mil,3220mil) on Top Layer And Track (4760mil,3212.126mil)(4760mil,3227.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.463mil|Location2.X=4757.713mil|Location1.Y=3209.001mil|Location2.Y=3215.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.463mil|Location2.X=4757.713mil|Location1.Y=3209.001mil|Location2.Y=3215.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R13-2(4742.283mil,3220mil) on Top Layer And Track (4760mil,3212.126mil)(4760mil,3227.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.102mil|Location2.X=3775.352mil|Location1.Y=3087.487mil|Location2.Y=3093.737mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.102mil|Location2.X=3775.352mil|Location1.Y=3087.487mil|Location2.Y=3093.737mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R14-1(3780.101mil,3078.307mil) on Top Layer And Track (3772.227mil,3096.023mil)(3787.975mil,3096.023mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.102mil|Location2.X=3775.352mil|Location1.Y=3098.31mil|Location2.Y=3104.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3769.102mil|Location2.X=3775.352mil|Location1.Y=3098.31mil|Location2.Y=3104.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R14-2(3780.101mil,3113.74mil) on Top Layer And Track (3772.227mil,3096.023mil)(3787.975mil,3096.023mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4484.767mil|Location2.X=4491.017mil|Location1.Y=2797.359mil|Location2.Y=2803.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4484.767mil|Location2.X=4491.017mil|Location1.Y=2797.359mil|Location2.Y=2803.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R15-1(4500.197mil,2808.358mil) on Top Layer And Track (4482.48mil,2800.484mil)(4482.48mil,2816.232mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4473.944mil|Location2.X=4480.194mil|Location1.Y=2797.359mil|Location2.Y=2803.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4473.944mil|Location2.X=4480.194mil|Location1.Y=2797.359mil|Location2.Y=2803.609mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R15-2(4464.764mil,2808.358mil) on Top Layer And Track (4482.48mil,2800.484mil)(4482.48mil,2816.232mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4706.463mil|Location2.X=4712.713mil|Location1.Y=2839.001mil|Location2.Y=2845.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4706.463mil|Location2.X=4712.713mil|Location1.Y=2839.001mil|Location2.Y=2845.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R16-1(4697.283mil,2850mil) on Top Layer And Track (4715mil,2842.126mil)(4715mil,2857.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4717.286mil|Location2.X=4723.536mil|Location1.Y=2839.001mil|Location2.Y=2845.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4717.286mil|Location2.X=4723.536mil|Location1.Y=2839.001mil|Location2.Y=2845.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R16-2(4732.717mil,2850mil) on Top Layer And Track (4715mil,2842.126mil)(4715mil,2857.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4389.001mil|Location2.X=4395.251mil|Location1.Y=3030.003mil|Location2.Y=3036.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4389.001mil|Location2.X=4395.251mil|Location1.Y=3030.003mil|Location2.Y=3036.253mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R17-1(4400mil,3045.433mil) on Bottom Layer And Track (4392.126mil,3027.716mil)(4407.874mil,3027.716mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4389.001mil|Location2.X=4395.251mil|Location1.Y=3019.18mil|Location2.Y=3025.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4389.001mil|Location2.X=4395.251mil|Location1.Y=3019.18mil|Location2.Y=3025.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R17-2(4400mil,3010mil) on Bottom Layer And Track (4392.126mil,3027.716mil)(4407.874mil,3027.716mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.001mil|Location2.X=4360.251mil|Location1.Y=2787.286mil|Location2.Y=2793.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.001mil|Location2.X=4360.251mil|Location1.Y=2787.286mil|Location2.Y=2793.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R18-1(4365mil,2802.716mil) on Top Layer And Track (4357.126mil,2785mil)(4372.874mil,2785mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.001mil|Location2.X=4360.251mil|Location1.Y=2776.463mil|Location2.Y=2782.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.001mil|Location2.X=4360.251mil|Location1.Y=2776.463mil|Location2.Y=2782.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R18-2(4365mil,2767.284mil) on Top Layer And Track (4357.126mil,2785mil)(4372.874mil,2785mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4369.001mil|Location2.X=4375.251mil|Location1.Y=2941.463mil|Location2.Y=2947.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4369.001mil|Location2.X=4375.251mil|Location1.Y=2941.463mil|Location2.Y=2947.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R19-1(4380mil,2932.284mil) on Top Layer And Track (4372.126mil,2950mil)(4387.874mil,2950mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4369.001mil|Location2.X=4375.251mil|Location1.Y=2952.286mil|Location2.Y=2958.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4369.001mil|Location2.X=4375.251mil|Location1.Y=2952.286mil|Location2.Y=2958.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R19-2(4380mil,2967.716mil) on Top Layer And Track (4372.126mil,2950mil)(4387.874mil,2950mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4409.434mil|Location2.X=4415.684mil|Location1.Y=2941.463mil|Location2.Y=2947.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4409.434mil|Location2.X=4415.684mil|Location1.Y=2941.463mil|Location2.Y=2947.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R20-1(4420.433mil,2932.284mil) on Top Layer And Track (4412.559mil,2950mil)(4428.307mil,2950mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4409.434mil|Location2.X=4415.684mil|Location1.Y=2952.286mil|Location2.Y=2958.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4409.434mil|Location2.X=4415.684mil|Location1.Y=2952.286mil|Location2.Y=2958.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R20-2(4420.433mil,2967.716mil) on Top Layer And Track (4412.559mil,2950mil)(4428.307mil,2950mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4791.463mil|Location2.X=4797.713mil|Location1.Y=3054.001mil|Location2.Y=3060.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4791.463mil|Location2.X=4797.713mil|Location1.Y=3054.001mil|Location2.Y=3060.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R2-1(4782.283mil,3065mil) on Top Layer And Track (4800mil,3057.126mil)(4800mil,3072.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4802.286mil|Location2.X=4808.536mil|Location1.Y=3054.001mil|Location2.Y=3060.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4802.286mil|Location2.X=4808.536mil|Location1.Y=3054.001mil|Location2.Y=3060.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R2-2(4817.717mil,3065mil) on Top Layer And Track (4800mil,3057.126mil)(4800mil,3072.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4046.463mil|Location2.X=4052.713mil|Location1.Y=3184.001mil|Location2.Y=3190.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4046.463mil|Location2.X=4052.713mil|Location1.Y=3184.001mil|Location2.Y=3190.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R23-1(4037.284mil,3195mil) on Top Layer And Track (4055mil,3187.126mil)(4055mil,3202.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4057.286mil|Location2.X=4063.536mil|Location1.Y=3184.001mil|Location2.Y=3190.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4057.286mil|Location2.X=4063.536mil|Location1.Y=3184.001mil|Location2.Y=3190.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R23-2(4072.716mil,3195mil) on Top Layer And Track (4055mil,3187.126mil)(4055mil,3202.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4427.864mil|Location2.X=4434.114mil|Location1.Y=3552.387mil|Location2.Y=3558.637mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4427.864mil|Location2.X=4434.114mil|Location1.Y=3552.387mil|Location2.Y=3558.637mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R26-1(4438.863mil,3543.207mil) on Top Layer And Track (4430.989mil,3560.924mil)(4446.736mil,3560.924mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4427.864mil|Location2.X=4434.114mil|Location1.Y=3563.21mil|Location2.Y=3569.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4427.864mil|Location2.X=4434.114mil|Location1.Y=3563.21mil|Location2.Y=3569.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R26-2(4438.863mil,3578.64mil) on Top Layer And Track (4430.989mil,3560.924mil)(4446.736mil,3560.924mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4706.463mil|Location2.X=4712.713mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4706.463mil|Location2.X=4712.713mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R3-1(4697.283mil,3500mil) on Bottom Layer And Track (4715mil,3492.126mil)(4715mil,3507.874mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4717.286mil|Location2.X=4723.536mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4717.286mil|Location2.X=4723.536mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R3-2(4732.717mil,3500mil) on Bottom Layer And Track (4715mil,3492.126mil)(4715mil,3507.874mil) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.463mil|Location2.X=4757.713mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.463mil|Location2.X=4757.713mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R4-1(4742.283mil,3500mil) on Top Layer And Track (4760mil,3492.126mil)(4760mil,3507.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4762.286mil|Location2.X=4768.536mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4762.286mil|Location2.X=4768.536mil|Location1.Y=3489.001mil|Location2.Y=3495.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R4-2(4777.717mil,3500mil) on Top Layer And Track (4760mil,3492.126mil)(4760mil,3507.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4852.286mil|Location2.X=4858.536mil|Location1.Y=3529.001mil|Location2.Y=3535.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4852.286mil|Location2.X=4858.536mil|Location1.Y=3529.001mil|Location2.Y=3535.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R5-1(4867.717mil,3540mil) on Top Layer And Track (4850mil,3532.126mil)(4850mil,3547.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4841.463mil|Location2.X=4847.713mil|Location1.Y=3529.001mil|Location2.Y=3535.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4841.463mil|Location2.X=4847.713mil|Location1.Y=3529.001mil|Location2.Y=3535.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R5-2(4832.283mil,3540mil) on Top Layer And Track (4850mil,3532.126mil)(4850mil,3547.874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4779.001mil|Location2.X=4785.251mil|Location1.Y=2966.03mil|Location2.Y=2972.28mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4779.001mil|Location2.X=4785.251mil|Location1.Y=2966.03mil|Location2.Y=2972.28mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R6-1(4790mil,2956.851mil) on Top Layer And Track (4782.126mil,2974.567mil)(4797.874mil,2974.567mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4779.001mil|Location2.X=4785.251mil|Location1.Y=2976.853mil|Location2.Y=2983.103mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4779.001mil|Location2.X=4785.251mil|Location1.Y=2976.853mil|Location2.Y=2983.103mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R6-2(4790mil,2992.284mil) on Top Layer And Track (4782.126mil,2974.567mil)(4797.874mil,2974.567mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4579.867mil|Location2.X=4586.117mil|Location1.Y=3597.286mil|Location2.Y=3603.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4579.867mil|Location2.X=4586.117mil|Location1.Y=3597.286mil|Location2.Y=3603.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R7-1(4590.866mil,3612.716mil) on Top Layer And Track (4582.992mil,3595mil)(4598.74mil,3595mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4579.867mil|Location2.X=4586.117mil|Location1.Y=3586.463mil|Location2.Y=3592.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4579.867mil|Location2.X=4586.117mil|Location1.Y=3586.463mil|Location2.Y=3592.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R7-2(4590.866mil,3577.284mil) on Top Layer And Track (4582.992mil,3595mil)(4598.74mil,3595mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.463mil|Location2.X=4757.713mil|Location1.Y=3249.434mil|Location2.Y=3255.684mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.463mil|Location2.X=4757.713mil|Location1.Y=3249.434mil|Location2.Y=3255.684mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R8-1(4742.283mil,3260.433mil) on Top Layer And Track (4760mil,3252.559mil)(4760mil,3268.307mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4762.286mil|Location2.X=4768.536mil|Location1.Y=3249.434mil|Location2.Y=3255.684mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4762.286mil|Location2.X=4768.536mil|Location1.Y=3249.434mil|Location2.Y=3255.684mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R8-2(4777.717mil,3260.433mil) on Top Layer And Track (4760mil,3252.559mil)(4760mil,3268.307mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.434mil|Location2.X=4545.684mil|Location1.Y=3597.286mil|Location2.Y=3603.536mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.434mil|Location2.X=4545.684mil|Location1.Y=3597.286mil|Location2.Y=3603.536mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R9-1(4550.433mil,3612.716mil) on Top Layer And Track (4542.559mil,3595mil)(4558.307mil,3595mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.434mil|Location2.X=4545.684mil|Location1.Y=3586.463mil|Location2.Y=3592.713mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4539.434mil|Location2.X=4545.684mil|Location1.Y=3586.463mil|Location2.Y=3592.713mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.917mil &lt; 5mil) Between Pad R9-2(4550.433mil,3577.284mil) on Top Layer And Track (4542.559mil,3595mil)(4558.307mil,3595mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.917mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID51SVJVWN40NEDFXGAHBDKKCAGKCXEAX1SZLM11GZJCEUSOWD2I0M"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3571.875mil|Location2.X=3578.125mil|Location1.Y=2726.875mil|Location2.Y=2733.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3571.875mil|Location2.X=3578.125mil|Location1.Y=2726.875mil|Location2.Y=2733.125mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Track (3575mil,2730mil)(3575mil,3792.992mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3571.875mil|Location2.X=3578.125mil|Location1.Y=2726.875mil|Location2.Y=2733.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3571.875mil|Location2.X=3578.125mil|Location1.Y=2726.875mil|Location2.Y=2733.125mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Track (3575mil,2730mil)(5465mil,2730mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3571.875mil|Location2.X=3578.125mil|Location1.Y=3789.867mil|Location2.Y=3796.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3571.875mil|Location2.X=3578.125mil|Location1.Y=3789.867mil|Location2.Y=3796.117mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Track (3575mil,3792.992mil)(5465mil,3792.992mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5461.875mil|Location2.X=5468.125mil|Location1.Y=3789.867mil|Location2.Y=3796.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Barne\Documents\Barney Docs\Visual Studio Code\Seadream-Avionics-V2\Seadream-Avionics-V2\Seadream_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5461.875mil|Location2.X=5468.125mil|Location1.Y=3789.867mil|Location2.Y=3796.117mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 7.874mil) Between Board Edge And Track (5465mil,2730mil)(5465mil,3792.992mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

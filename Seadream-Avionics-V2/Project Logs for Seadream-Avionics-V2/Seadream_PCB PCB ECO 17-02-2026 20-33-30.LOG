@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=BARO_INT Pin=B1-59
+Removed Pin From Net: NetName=BARO_SCL Pin=B1-61
+Removed Pin From Net: NetName=BARO_SDA Pin=B1-62
+Added Pin To Net: NetName=BARO_SCL Pin=B1-29
+Added Pin To Net: NetName=BARO_INT Pin=B1-33
+Added Pin To Net: NetName=BARO_SDA Pin=B1-35
