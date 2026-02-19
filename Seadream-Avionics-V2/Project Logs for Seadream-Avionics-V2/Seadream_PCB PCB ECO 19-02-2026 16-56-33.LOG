@@ -1,0 +1,5 @@
+Change Component Footprint: Designator=D7 Old Footprint=LTST-C191KRKT_V New Footprint=LTST-C191KRKT_V
+Change Component Footprint: Designator=R27 Old Footprint=RESC1608X55X25LL10T15 New Footprint=RESC1608X55X25LL10T15
+Change Net Name : Old Net Name=BARO_LED New Net Name=IMU_LED
+Change Net Name : Old Net Name=IMU_LED New Net Name=SD_LED
+Change Net Name : Old Net Name=SD_LED New Net Name=BARO_LED
